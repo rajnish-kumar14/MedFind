@@ -34,11 +34,26 @@ const addMedicine = async (req, res) => {
 };
 
 // Get All Medicines
+// Get Medicines
 const getMedicines = async (req, res) => {
 
     try {
 
-        const medicines = await Medicine.find();
+        const medicineName = req.query.name;
+
+        let medicines;
+
+        if (medicineName) {
+
+            medicines = await Medicine.find({
+                name: { $regex: medicineName, $options: "i" }
+            });
+
+        } else {
+
+            medicines = await Medicine.find();
+
+        }
 
         res.status(200).json({
             message: "Medicines Fetched Successfully",

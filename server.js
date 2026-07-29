@@ -1,18 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const medicineRoutes = require("./routes/medicineRoutes");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
-
-// Authentication Routes
 
 app.use(authRoutes);
 app.use(medicineRoutes);
-
 
 
 
